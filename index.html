@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Incorporaciones académicas - Dr. Jorge Milán Carrillo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#062846;
+  --navy-2:#0d3558;
+  --navy-3:#17496f;
+  --gold:#c9a24a;
+  --gold-2:#e1c06a;
+  --cream:#f8f4ea;
+  --cream-2:#fffdf8;
+  --paper:#fffefa;
+  --ink:#0d2438;
+  --muted:#6f7883;
+  --line:#d7c9ac;
+  --soft:#ece4d4;
+  --shadow:0 8px 24px rgba(19,34,48,.10);
+  --shadow-soft:0 4px 14px rgba(19,34,48,.08);
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"Jost",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+.page{
+  width:100%;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255,255,255,.96), rgba(248,244,234,.88) 38%, rgba(245,239,226,1) 100%);
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--navy),#08233c 70%,#031827);
+  color:white;
+  padding:28px clamp(22px,4vw,64px) 22px;
+  border-bottom:4px solid var(--gold);
+  box-shadow:0 3px 18px rgba(0,0,0,.22);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.hero-title{
+  max-width:980px;
+}
+
+.hero h1{
+  margin:0;
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(2rem,3.2vw,4rem);
+  line-height:.98;
+  font-weight:600;
+  letter-spacing:.01em;
+}
+
+.hero h1 .gold{
+  color:var(--gold-2);
+  display:block;
+}
+
+.hero .subtitle{
+  margin-top:18px;
+  color:var(--gold-2);
+  font-size:clamp(.76rem,1vw,.98rem);
+  letter-spacing:.20em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+
+.monogram{
+  min-width:150px;
+  text-align:center;
+  color:var(--gold-2);
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(3.8rem,7vw,7.2rem);
+  line-height:.8;
+  letter-spacing:.02em;
+  opacity:.92;
+}
+
+.monogram .ornament{
+  display:block;
+  margin-top:8px;
+  font-size:2rem;
+  line-height:1;
+  opacity:.85;
+}
+
+.content{
+  padding:32px clamp(18px,3vw,58px) 0;
+}
+
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+  margin-bottom:34px;
+}
+
+.cards{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+}
+
+.info-card{
+  width:min(100%,280px);
+  min-height:94px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(160,145,118,.38);
+  border-radius:14px;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px 22px;
+}
+
+.info-icon{
+  display:none;
+}
+
+.info-number{
+  font-family:"Jost",sans-serif;
+  font-size:2.15rem;
+  line-height:1;
+  color:var(--navy);
+  font-weight:500;
+  letter-spacing:-0.02em;
+}
+
+.info-label{
+  margin-top:7px;
+  color:#576371;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.75rem;
+  line-height:1.35;
+  font-weight:500;
+}
+
+.help-card{
+  width:min(100%,360px);
+  background:rgba(255,255,255,.80);
+  border:1px solid rgba(160,145,118,.36);
+  border-radius:14px;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:20px 24px;
+  font-size:.9rem;
+  line-height:1.35;
+  font-weight:500;
+}
+
+.help-card .hand{
+  color:var(--navy);
+  font-size:2.3rem;
+}
+
+.timeline-wrap{
+  width:100%;
+  overflow-x:auto;
+  overflow-y:visible;
+  padding:10px 0 28px;
+  -webkit-overflow-scrolling:touch;
+}
+
+.timeline{
+  position:relative;
+  min-width:1180px;
+  padding:38px 4px 30px;
+}
+
+.axis{
+  position:absolute;
+  left:0;
+  right:0;
+  top:75px;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2),var(--gold));
+  box-shadow:0 1px 0 rgba(255,255,255,.8), 0 2px 8px rgba(201,162,74,.28);
+}
+
+.axis:before,
+.axis:after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--gold);
+  transform:translateY(-50%);
+}
+
+.axis:before{left:0}
+.axis:after{right:0}
+
+.years{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(11,1fr);
+  gap:22px;
+  align-items:start;
+}
+
+.year-block{
+  position:relative;
+  text-align:center;
+  min-width:86px;
+}
+
+.year-node{
+  width:74px;
+  height:74px;
+  margin:0 auto;
+  border-radius:50%;
+  border:3px solid var(--gold);
+  background:radial-gradient(circle at 35% 25%,#17496f,var(--navy) 68%);
+  color:white;
+  font-family:"Cormorant Garamond",serif;
+  font-size:1.35rem;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  position:relative;
+  z-index:3;
+}
+
+.year-node:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 8px 18px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.year-node.active{
+  background:radial-gradient(circle at 35% 25%,#255f8c,var(--navy-2) 66%);
+  box-shadow:0 10px 22px rgba(0,0,0,.26), 0 0 0 5px rgba(201,162,74,.13);
+}
+
+.chev{
+  margin-top:12px;
+  color:var(--navy);
+  font-size:1.35rem;
+  font-weight:700;
+  line-height:1;
+  transition:transform .2s ease;
+}
+
+.year-block.open .chev{
+  transform:rotate(180deg);
+  color:var(--gold);
+}
+
+.stem{
+  width:3px;
+  height:24px;
+  margin:2px auto 0;
+  background:var(--gold);
+  border-radius:5px;
+}
+
+.count-card{
+  width:92px;
+  min-height:68px;
+  margin:0 auto;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(160,145,118,.38);
+  border-radius:11px;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.count{
+  font-family:"Jost",sans-serif;
+  font-size:1.7rem;
+  font-weight:600;
+  color:var(--navy);
+  line-height:1;
+  letter-spacing:-0.02em;
+}
+
+.count-label{
+  margin-top:7px;
+  font-size:.62rem;
+  color:var(--ink);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:600;
+}
+
+.people-panel{
+  display:none;
+  position:absolute;
+  top:184px;
+  left:50%;
+  transform:translateX(-50%);
+  width:320px;
+  max-height:360px;
+  overflow:auto;
+  text-align:left;
+  background:rgba(255,255,255,.93);
+  border:1px solid rgba(160,145,118,.36);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  z-index:7;
+  backdrop-filter:blur(7px);
+}
+
+.year-block.open .people-panel{
+  display:block;
+  animation:fadeUp .22s ease both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translate(-50%,12px)}
+  to{opacity:1; transform:translate(-50%,0)}
+}
+
+.person{
+  display:grid;
+  grid-template-columns:18px 1fr;
+  gap:8px;
+  padding:9px 18px 8px;
+  border-bottom:1px solid var(--soft);
+}
+
+.person:last-of-type{
+  border-bottom:none;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  margin-top:8px;
+  border-radius:50%;
+  background:var(--gold);
+}
+
+.person-name{
+  font-size:.82rem;
+  color:#132a3c;
+  font-weight:500;
+  line-height:1.25;
+}
+
+.person-meta{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:.68rem;
+  letter-spacing:.04em;
+}
+
+.panel-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 18px;
+  border-top:1px solid var(--soft);
+  color:#566372;
+  font-size:.74rem;
+  background:rgba(248,244,234,.55);
+}
+
+.panel-footer .cal{
+  color:var(--gold);
+  font-size:1.05rem;
+}
+
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:10px 0 24px;
+}
+
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:10px 18px;
+  font-family:"Jost",sans-serif;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .18s ease;
+}
+
+.btn-primary{
+  background:var(--navy);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:var(--navy-3);
+}
+
+.btn-secondary{
+  background:transparent;
+  border:1px solid var(--navy);
+  color:var(--navy);
+}
+
+.btn-secondary:hover{
+  background:var(--navy);
+  color:white;
+}
+
+.footer{
+  margin-top:20px;
+  background:linear-gradient(135deg,var(--navy),#08233c 70%,#031827);
+  border-top:4px solid var(--gold);
+  color:rgba(255,255,255,.82);
+  text-align:center;
+  padding:20px 18px 24px;
+}
+
+.footer-mark{
+  color:var(--gold-2);
+  font-size:1.45rem;
+  margin-bottom:6px;
+}
+
+.footer-text{
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+@media (max-width: 900px){
+  .hero{
+    padding:24px 18px 18px;
+  }
+
+  .monogram{
+    min-width:auto;
+    font-size:3.6rem;
+  }
+
+  .top-row{
+    flex-direction:column;
+  }
+
+  .help-card{
+    width:100%;
+  }
+}
+
+@media (max-width: 640px){
+  .hero{
+    flex-direction:column;
+  }
+
+  .monogram{
+    align-self:flex-end;
+    font-size:3.2rem;
+  }
+
+  .content{
+    padding:22px 14px 0;
+  }
+
+  .cards{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .info-card{
+    width:100%;
+    min-height:82px;
+  }
+
+  .timeline{
+    min-width:0;
+    padding:0 0 10px;
+  }
+
+  .timeline-wrap{
+    overflow:visible;
+    padding:8px 0 16px;
+  }
+
+  .axis{
+    display:none;
+  }
+
+  .years{
+    display:block;
+  }
+
+  .year-block{
+    display:grid;
+    grid-template-columns:74px 1fr;
+    grid-template-areas:
+      "node count"
+      "panel panel";
+    gap:0 14px;
+    align-items:center;
+    text-align:left;
+    padding:14px 0 14px 4px;
+    border-bottom:1px solid rgba(160,145,118,.28);
+  }
+
+  .year-node{
+    grid-area:node;
+    width:64px;
+    height:64px;
+    margin:0;
+    font-size:1.12rem;
+  }
+
+  .chev,.stem{
+    display:none;
+  }
+
+  .count-card{
+    grid-area:count;
+    width:100%;
+    min-height:58px;
+    margin:0;
+    align-items:flex-start;
+    padding-left:18px;
+  }
+
+  .people-panel{
+    grid-area:panel;
+    position:static;
+    transform:none;
+    width:100%;
+    max-height:none;
+    margin-top:12px;
+  }
+
+  .year-block.open .people-panel{
+    animation:fadeMobile .22s ease both;
+  }
+
+  @keyframes fadeMobile{
+    from{opacity:0; transform:translateY(8px)}
+    to{opacity:1; transform:translateY(0)}
+  }
+
+  .footer-text{
+    line-height:1.7;
+  }
+}
+
+@media print{
+  .help-card,.actions{display:none}
+  body{background:white}
+  .timeline-wrap{overflow:visible}
+  .timeline{min-width:100%}
+  .people-panel{box-shadow:none}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+  <header class="hero">
+    <div class="hero-title">
+      <h1>
+        Incorporaciones académicas asociadas al<br>
+        fortalecimiento institucional promovido por el
+        <span class="gold">Dr. Jorge Milán Carrillo</span>
+      </h1>
+      <div class="subtitle">Facultad de Ciencias Químico Biológicas · Universidad Autónoma de Sinaloa</div>
+    </div>
+    <div class="monogram">JMC<span class="ornament"></span></div>
+  </header>
+
+  <main class="content">
+    <section class="top-row">
+      <div class="cards">
+        <article class="info-card">
+          <div class="info-icon"></div>
+          <div>
+            <div class="info-number" id="totalPeople">0</div>
+            <div class="info-label">Incorporaciones registradas</div>
+          </div>
+        </article>
+
+        <article class="info-card">
+          <div class="info-icon"></div>
+          <div>
+            <div class="info-number">2011–2021</div>
+            <div class="info-label">Periodo documentado</div>
+          </div>
+        </article>
+      </div>
+
+      <article class="help-card">
+        <div class="hand"></div>
+        <div>Haz clic en un año para expandir o contraer la lista de incorporaciones.</div>
+      </article>
+    </section>
+
+    <section class="timeline-wrap" aria-label="Línea de tiempo de incorporaciones académicas">
+      <div class="timeline">
+        <div class="axis"></div>
+        <div class="years" id="years"></div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button class="btn btn-primary" onclick="expandAll()">Expandir todo</button>
+      <button class="btn btn-secondary" onclick="collapseAll()">Contraer todo</button>
+      <button class="btn btn-secondary" onclick="window.print()">Exportar PDF</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-mark"></div>
+    <div class="footer-text">Memoria institucional · Fortalecimiento académico · Compromiso con la excelencia</div>
+  </footer>
+</div>
+
+<script>
+const rawData = [
+  {grado:"Doctorado", nombre:"Erika Yudit Ríos Iribe", empleado:"18191", fecha:"16/08/2011"},
+  {grado:"Doctorado", nombre:"Yesmi Patricia Ahumada Santos", empleado:"18828", fecha:"01/03/2012"},
+  {grado:"Doctorado", nombre:"Sergio Aaron Jiménez Lam", empleado:"", fecha:"01/03/2012"},
+  {grado:"Doctorado", nombre:"Karen Virginia Pineda Hidalgo", empleado:"18813", fecha:"14/03/2012"},
+  {grado:"Licenciatura", nombre:"Lourdes Janeth Germán Báez", empleado:"18761", fecha:"01/05/2012"},
+  {grado:"Doctorado", nombre:"Eusiel Rubio Castro", empleado:"20667", fecha:"01/09/2012"},
+  {grado:"Doctorado", nombre:"Ada Keila Milán Noris", empleado:"19399", fecha:"01/09/2012"},
+  {grado:"Doctorado", nombre:"Martha Edith López López", empleado:"18989", fecha:"01/11/2012"},
+  {grado:"Doctorado", nombre:"Lorenzo Ulises Osuna Martínez", empleado:"18991", fecha:"14/11/2012"},
+  {grado:"Doctorado", nombre:"Bianca Anabel Amezquita López", empleado:"19560", fecha:"01/11/2013"},
+  {grado:"Doctorado", nombre:"Liliana León López", empleado:"19757", fecha:"01/02/2014"},
+  {grado:"Doctorado", nombre:"Gloria Marisol Castañeda Ruelas", empleado:"19745", fecha:"01/02/2014"},
+  {grado:"Doctorado", nombre:"José Pablo Ruelas Leyva", empleado:"", fecha:"01/03/2014"},
+  {grado:"Doctorado", nombre:"Rodolfo Bernal Reynaga", empleado:"20798", fecha:"07/01/2015"},
+  {grado:"Maestría", nombre:"Jesús Ricardo Parra Unda", empleado:"20797", fecha:"15/01/2015"},
+  {grado:"Licenciatura", nombre:"Nancy Yareli Salazar Salas", empleado:"20684", fecha:"01/02/2015"},
+  {grado:"Licenciatura", nombre:"Maritza Elizabeth Cervantes Gaxiola", empleado:"20666", fecha:"01/02/2015"},
+  {grado:"Doctorado", nombre:"Carlos Iván Delgado Nieblas", empleado:"20752", fecha:"01/02/2015"},
+  {grado:"Doctorado", nombre:"Álvaro Montoya Rodríguez", empleado:"20799", fecha:"05/02/2015"},
+  {grado:"Doctorado", nombre:"Cinthia Deniz Martínez Benítez", empleado:"20761", fecha:"01/03/2015"},
+  {grado:"Doctorado", nombre:"Luis Martín Sánchez Magaña", empleado:"20796", fecha:"30/03/2015"},
+  {grado:"Maestría", nombre:"Dora María Cedano Prieto", empleado:"21035", fecha:"04/05/2015"},
+  {grado:"Doctorado", nombre:"José Geovanni Romero Quintana", empleado:"21097", fecha:"19/08/2015"},
+  {grado:"Doctorado", nombre:"Evelia María Milán Noris", empleado:"21436", fecha:"05/01/2016"},
+  {grado:"Doctorado", nombre:"Maricela Sarita Montaño Valdez", empleado:"21596", fecha:"09/03/2016"},
+  {grado:"Maestría", nombre:"Evangelina García Armenta", empleado:"21589", fecha:"04/04/2016"},
+  {grado:"Doctorado", nombre:"Patricia Catalina García Cervantes", empleado:"22231", fecha:"08/12/2016"},
+  {grado:"Doctorado", nombre:"Cristian Alarid García", empleado:"22711", fecha:"15/09/2017"},
+  {grado:"Doctorado", nombre:"Marcos Daniel González Llanes", empleado:"23045", fecha:"01/02/2018"},
+  {grado:"Doctorado", nombre:"Nohemí Guadalupe Díaz Tafoya", empleado:"23563", fecha:"16/08/2018"},
+  {grado:"Doctorado", nombre:"Daniela Margarita Castillo Medina", empleado:"23729", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Miguel Ángel Trapero Inzunza", empleado:"23724", fecha:"01/09/2018"},
+  {grado:"Licenciatura", nombre:"Lidia Elena Ayón Reyna", empleado:"23728", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Kenia López López", empleado:"23723", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Dulce María Domínguez Arispuro", empleado:"23746", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Oscar Daniel Argüelles López", empleado:"23748", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Ramón Alberto Acedo Espinoza", empleado:"23750", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Carolina del Carmen Murúa López", empleado:"23726", fecha:"01/09/2018"},
+  {grado:"Doctorado", nombre:"Marcela Martínez Valenzuela", empleado:"23837", fecha:"21/01/2019"},
+  {grado:"Doctorado", nombre:"Aldo Francisco Clemente Soto", empleado:"23838", fecha:"21/01/2019"},
+  {grado:"Doctorado", nombre:"Ana María Morales Burgos", empleado:"23966", fecha:"07/03/2019"},
+  {grado:"Doctorado", nombre:"Karla Marina Báez Parra", empleado:"23965", fecha:"01/04/2019"},
+  {grado:"Doctorado", nombre:"Selene Isabel Patiño", empleado:"24169", fecha:"01/10/2019"},
+  {grado:"Doctorado", nombre:"María de Jesús Navarro Arias", empleado:"23747", fecha:"25/10/2019"},
+  {grado:"Doctorado", nombre:"Marco César Carrazco Escalante", empleado:"24260", fecha:"16/01/2020"},
+  {grado:"Doctorado", nombre:"Rosalina Iribe Salazar", empleado:"24259", fecha:"16/01/2020"},
+  {grado:"Doctorado", nombre:"Sergio Alonso Durán Pérez", empleado:"24589", fecha:"01/01/2021"},
+  {grado:"Maestría", nombre:"Xochitl Ariadna Ruiz Armenta", empleado:"24593", fecha:"01/01/2021"},
+  {grado:"Doctorado", nombre:"Abraham Calderón Castro", empleado:"24544", fecha:"01/01/2021"},
+  {grado:"Doctorado", nombre:"María Guadalupe Laguna Martínez", empleado:"24592", fecha:"01/01/2021"},
+
+  {grado:"Doctorado", nombre:"Eduardo Julián Galván García", empleado:"24619", fecha:"01/03/2021"}
+];
+
+function parseDate(fecha){
+  const [d,m,y] = fecha.split("/").map(Number);
+  return new Date(y, m-1, d);
+}
+
+function monthName(n){
+  const names = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  return names[n];
+}
+
+function titleCase(text){
+  return text
+    .toLocaleLowerCase("es-MX")
+    .split(" ")
+    .map(w => {
+      if(["de","del","la","las","los","y"].includes(w)) return w;
+      return w.charAt(0).toLocaleUpperCase("es-MX") + w.slice(1);
+    })
+    .join(" ");
+}
+
+const data = rawData.map(d => {
+  const date = parseDate(d.fecha);
+  return {...d, nombre:titleCase(d.nombre), date, year:date.getFullYear(), month:date.getMonth()};
+}).sort((a,b) => a.date - b.date || a.nombre.localeCompare(b.nombre));
+
+const years = Array.from({length:2021-2011+1}, (_,i)=>2011+i);
+const grouped = Object.fromEntries(years.map(y => [y, []]));
+data.forEach(d => grouped[d.year].push(d));
+
+document.getElementById("totalPeople").textContent = data.length;
+
+const yearsEl = document.getElementById("years");
+
+years.forEach((year, idx) => {
+  const people = grouped[year];
+  const first = people[0];
+  const last = people[people.length-1];
+
+  let range = "";
+  if(people.length){
+    range = first.month === last.month
+      ? `${monthName(first.month)} ${year}`
+      : `${monthName(first.month)} – ${monthName(last.month)} ${year}`;
+  }
+
+  const block = document.createElement("article");
+  block.className = "year-block";
+  block.dataset.year = year;
+
+  const peopleHTML = people.map(p => `
+    <div class="person">
+      <span class="dot"></span>
+      <div>
+        <div class="person-name">${p.nombre}</div>
+        
+      </div>
+    </div>
+  `).join("");
+
+  block.innerHTML = `
+    <button class="year-node" type="button" aria-expanded="false" aria-controls="panel-${year}">
+      ${year}
+    </button>
+    <div class="chev">⌄</div>
+    <div class="stem"></div>
+    <div class="count-card">
+      <div class="count">${people.length}</div>
+      <div class="count-label">${people.length === 1 ? "persona" : "personas"}</div>
+    </div>
+    <div class="people-panel" id="panel-${year}">
+      ${peopleHTML || `<div class="person"><span class="dot"></span><div><div class="person-name">Sin incorporaciones registradas</div></div></div>`}
+      <div class="panel-footer">
+        <span>Periodo ${year}</span>
+        <span class="cal"></span>
+      </div>
+    </div>
+  `;
+
+  yearsEl.appendChild(block);
+
+  const btn = block.querySelector(".year-node");
+  btn.addEventListener("click", () => {
+    const open = block.classList.toggle("open");
+    btn.classList.toggle("active", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+});
+
+function expandAll(){
+  document.querySelectorAll(".year-block").forEach(block => {
+    block.classList.add("open");
+    const btn = block.querySelector(".year-node");
+    btn.classList.add("active");
+    btn.setAttribute("aria-expanded","true");
+  });
+}
+
+function collapseAll(){
+  document.querySelectorAll(".year-block").forEach(block => {
+    block.classList.remove("open");
+    const btn = block.querySelector(".year-node");
+    btn.classList.remove("active");
+    btn.setAttribute("aria-expanded","false");
+  });
+}
+
+const defaultOpen = document.querySelector('.year-block[data-year="2012"] .year-node');
+if(defaultOpen) defaultOpen.click();
+</script>
+</body>
+</html>
